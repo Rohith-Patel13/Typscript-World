@@ -211,6 +211,67 @@ for (let prod of products) {
     console.log(prod.details?.color)
 }
 ```
-28. Arrow Function | TypeScript Advance ES6 Features
+28. Specifying a type for a function
 ```ts
+// Specifying a type for a `sum` function
+const sum: (num1:number) => number = num1 => num1 + 1;
+console.log(sum(1)); // [LOG]: 2 
+```
+29. Default Function Parameter | TypeScript Advance ES6 Features
+```ts
+/**
+ * 1. Using default parameter you can set a default value
+ * for a parameter it's not mandatory to pass a value
+ * for that parameter while calling the function
+ * and when you don't pass a value for that parameter
+ * then that default parameter will use it's default value
+ * 
+ * 2. Default parameter should always be the last parameter in the
+ * parameter list, you cannot make a default parameter by keeping it as
+ * the first parameter in the parameter list
+ * 
+ * 3. There is no such restriction like you can only
+ * use one default parameter, you can use multiple 
+ * default parameters but they should all come at end after 
+ * your regular parameters
+ */
+function printDetails(name:string, age: number, jobTitle:string="software developer", company: string = "worko") {
+    console.log(
+        `Hi, My name is ${name}.I'm ${age} years old. I'm a ${jobTitle} at ${company} company.`
+    )
+}
+
+printDetails("rohith", 23) // [LOG]: "Hi, My name is rohith.I'm 23 years old. I'm a software developer at worko company."
+```
+30. An Overview of OOP
+```ts
+/**
+ * OOPs:
+ *    1. Representing a real world entities using an object is known as OOPs 
+ *    2. `Object` is the data that we work with and `Class` is the creator
+ *       using which we create this data
+ */
+```
+31. Creating & Using a Class
+```ts
+/**
+ * 1. while creating a class the name must starts with the `Uppercase` letter
+ */
+class User {
+    name: string
+    age: number
+    gender: string
+
+    constructor(n:string,a:number,g:string){
+        this.name = n,
+        this.age = a,
+        this.gender = g
+    }
+}
+
+const userOneObj = new User("rohith",23,"male")
+const userTwoObj = new User("jenny",23,"male")
+
+console.log(userOneObj) // [LOG]: User: { "name": "rohith", "age": 23,"gender": "male" } 
+console.log(userTwoObj) // [LOG]: User: { "name": "jenny", "age": 23, "gender": "male" } 
 ```
