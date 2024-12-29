@@ -262,6 +262,7 @@ class User {
     age: number
     gender: string
 
+    // `constructor` is a special method which gets called whenever we try to instantiate a class 
     constructor(n:string,a:number,g:string){
         this.name = n,
         this.age = a,
@@ -275,3 +276,63 @@ const userTwoObj = new User("jenny",23,"male")
 console.log(userOneObj) // [LOG]: User: { "name": "rohith", "age": 23,"gender": "male" } 
 console.log(userTwoObj) // [LOG]: User: { "name": "jenny", "age": 23, "gender": "male" } 
 ```
+32. Methods of a Class
+```ts
+
+class User {
+    name: string
+    age: number
+    gender: string
+
+    // `constructor` is a special method which gets called whenever we try to instantiate a class 
+    constructor(n:string,a:number,g:string){
+        this.name = n,
+        this.age = a,
+        this.gender = g
+    }
+
+    greetUser() {
+        const message: string = `Hi ${this.name}`
+        console.log(message)
+    }
+}
+
+const userOneObj = new User("rohith",23,"male")
+// console.log(userOneObj) // [LOG]: User: { "name": "rohith", "age": 23,"gender": "male" } 
+userOneObj.greetUser() // [LOG]: "Hi rohith" 
+
+const userTwoObj = new User("jenny",23,"male")
+// console.log(userTwoObj) // [LOG]: User: { "name": "jenny", "age": 23, "gender": "male" } 
+```
+33. Access Modifiers | TypeScript Classes
+```ts
+class Employee {
+    empName:string
+    private salary: number
+    baseLocation:string
+    isEligible:boolean
+    private hikePercent: number
+
+    constructor(name:string,sal:number,loc:string,isEligible:boolean,hikePercent:number) {
+        this.empName = name
+        this.salary = sal 
+        this.baseLocation = loc
+        this.isEligible = isEligible
+        this.hikePercent = hikePercent
+    }
+
+    getSalary(){
+        if(this.isEligible){
+            return (this.salary + this.salary * this.hikePercent/100)
+        }
+
+        return this.salary
+    }
+}
+
+const employee = new Employee("rohith",37500,"banglore",true,20)
+// employee.hikePercent() // Errors in code: Property 'hikePercent' is private and only accessible within class 'Employee'.
+
+console.log(employee.getSalary()) // [LOG]: 45000
+```
+34. 
