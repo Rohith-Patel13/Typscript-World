@@ -335,4 +335,95 @@ const employee = new Employee("rohith",37500,"banglore",true,20)
 
 console.log(employee.getSalary()) // [LOG]: 45000
 ```
-34. 
+34. Shorthand Property Initializer
+```ts
+class Employee {
+    constructor(
+        public empName:string, 
+        private salary:number, 
+        private baseLocation:string, 
+        public isEligible:boolean, 
+        public hikePercent:number
+    ) {}
+
+    getSalary(){
+        if(this.isEligible){
+            return (this.salary + this.salary * this.hikePercent/100)
+        }
+
+        return this.salary
+    }
+}
+
+const employee = new Employee("rohith",37500,"banglore",true,20)
+// employee.hikePercent() // Errors in code: Property 'hikePercent' is private and only accessible within class 'Employee'.
+
+console.log(employee.getSalary()) // [LOG]: 45000
+```
+35. Readonly Property 
+```ts
+/**
+ * @see https://youtu.be/UnZOmy1EAgA?si=MqjXoTi1BZhIYxTv
+ */
+class Employee {
+    constructor(
+        public empName:string, 
+        private salary:number, 
+        private baseLocation:string, 
+        public isEligible:boolean, 
+        public hikePercent:number,
+        readonly empId: number
+    ) {}
+
+    getSalary(){
+        if(this.isEligible){
+            return (this.salary + this.salary * this.hikePercent/100)
+        }
+
+        return this.salary
+    }
+}
+
+const employee = new Employee("rohith",37500,"banglore",true,20, 207)
+// employee.hikePercent() // Errors in code: Property 'hikePercent' is private and only accessible within class 'Employee'.
+
+// console.log(employee.getSalary()) // [LOG]: 45000
+
+console.log(employee.empId) // [LOG]: 207
+```
+36. Understanding Inheritance
+```ts
+/**
+ * @see https://youtu.be/iTnB1BZdO-4?si=NNk3oK0BXF9O-WV3
+ */
+class Person {
+    constructor(
+        public name:string,
+        public age: number,
+        public gender: string
+    ){}
+
+    getAge() {
+        return this.age
+    }
+}
+
+class Employee extends Person {
+    constructor(
+        public name: string,
+        public age: number,
+        public gender: string,
+        public salary: number,
+        public bonus: number
+    ){
+        super(name,age,gender)
+    }
+
+    getSalary() {
+        return this.salary
+    }
+}
+
+const employeeObj = new Employee("rohith",23,"male",10000,5000)
+console.log(employeeObj.getAge()) // [LOG]: 23 
+```
