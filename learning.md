@@ -427,3 +427,100 @@ class Employee extends Person {
 const employeeObj = new Employee("rohith",23,"male",10000,5000)
 console.log(employeeObj.getAge()) // [LOG]: 23 
 ```
+37. Protected Modifier
+```ts
+
+class Person {
+    // private dob = 2
+    protected dob = 2
+}
+
+class Employee extends Person {
+    calculateAge() {
+        return 25 - this.dob
+    }
+}
+
+const employeeObject = new Employee()
+console.log(employeeObject.calculateAge()) // [LOG]: 23
+```
+38. Method Overriding 
+```ts
+
+class Person {
+    // private dob = 2
+    protected dob = 2
+    calculateAge() {
+        return `${25} - ${this.dob} in "calculateAge" method in "Employee" Class`
+    }
+}
+
+class Employee extends Person {
+    calculateAge() {
+        return `${25} - ${this.dob} in "calculateAge" method in "Employee" Class`
+    }
+}
+
+const employeeObject = new Employee()
+console.log(employeeObject.calculateAge()) // [LOG]: "25 - 2 in "calculateAge" method in "Employee" Class"
+```
+39. Getter & Setter Methods
+```ts
+
+class Circle {
+    private _radius:number = 2
+
+    get radius(){
+        return this._radius
+    }
+
+    /**
+     * Setters cannot return a value.
+     */
+    set radius(value: number){
+        this._radius = value
+    }
+
+    get diameter(){
+        return this._radius * 2
+    }
+
+    set diameter(value:number){
+        this._radius = value/2
+    }
+}
+
+const circleObject = new Circle()
+circleObject.radius = 4
+console.log(circleObject.radius) // [LOG]: 4 
+```
+40. Static Methods & Static Properties
+```ts
+/**
+ * @see https://youtu.be/uHJpoWmg6Xw?si=Ot9nBvxbY98Rs1og
+ */
+class Employee {
+    static count = 0
+
+    constructor(){
+        Employee.count++
+    }
+
+    static sayHello(){
+        return "Hi"
+    }
+}
+
+const empOneObj = new Employee()
+console.log(Employee.count) // [LOG]: 1 
+
+const empTwoObj = new Employee()
+console.log(Employee.count) // [LOG]: 2 
+
+const empTheeeObj = new Employee()
+console.log(Employee.count) // [LOG]: 3 
+```
+41. Abstract Class
+```ts
+
+```
