@@ -276,6 +276,8 @@ const userTwoObj = new User("jenny",23,"male")
 console.log(userOneObj) // [LOG]: User: { "name": "rohith", "age": 23,"gender": "male" } 
 console.log(userTwoObj) // [LOG]: User: { "name": "jenny", "age": 23, "gender": "male" } 
 ```
+
+
 32. Methods of a Class
 ```ts
 
@@ -304,6 +306,8 @@ userOneObj.greetUser() // [LOG]: "Hi rohith"
 const userTwoObj = new User("jenny",23,"male")
 // console.log(userTwoObj) // [LOG]: User: { "name": "jenny", "age": 23, "gender": "male" } 
 ```
+
+
 33. Access Modifiers | TypeScript Classes
 ```ts
 class Employee {
@@ -335,6 +339,8 @@ const employee = new Employee("rohith",37500,"banglore",true,20)
 
 console.log(employee.getSalary()) // [LOG]: 45000
 ```
+
+
 34. Shorthand Property Initializer
 ```ts
 class Employee {
@@ -360,6 +366,8 @@ const employee = new Employee("rohith",37500,"banglore",true,20)
 
 console.log(employee.getSalary()) // [LOG]: 45000
 ```
+
+
 35. Readonly Property 
 ```ts
 /**
@@ -391,6 +399,8 @@ const employee = new Employee("rohith",37500,"banglore",true,20, 207)
 
 console.log(employee.empId) // [LOG]: 207
 ```
+
+
 36. Understanding Inheritance
 ```ts
 /**
@@ -427,6 +437,8 @@ class Employee extends Person {
 const employeeObj = new Employee("rohith",23,"male",10000,5000)
 console.log(employeeObj.getAge()) // [LOG]: 23 
 ```
+
+
 37. Protected Modifier
 ```ts
 
@@ -444,6 +456,8 @@ class Employee extends Person {
 const employeeObject = new Employee()
 console.log(employeeObject.calculateAge()) // [LOG]: 23
 ```
+
+
 38. Method Overriding 
 ```ts
 
@@ -464,6 +478,8 @@ class Employee extends Person {
 const employeeObject = new Employee()
 console.log(employeeObject.calculateAge()) // [LOG]: "25 - 2 in "calculateAge" method in "Employee" Class"
 ```
+
+
 39. Getter & Setter Methods
 ```ts
 
@@ -494,6 +510,8 @@ const circleObject = new Circle()
 circleObject.radius = 4
 console.log(circleObject.radius) // [LOG]: 4 
 ```
+
+
 40. Static Methods & Static Properties
 ```ts
 /**
@@ -520,7 +538,126 @@ console.log(Employee.count) // [LOG]: 2
 const empTheeeObj = new Employee()
 console.log(Employee.count) // [LOG]: 3 
 ```
+
+
 41. Abstract Class
 ```ts
+/**
+ * @see https://youtu.be/jNGfXY8OKiQ?si=y96S2rydjXNI_KVf
+ */
+abstract class Employee {
+    abstract getSalary(): number
+}
+ 
+class PermanentEmployee extends Employee {
 
+    constructor(public salary: number){
+        super()
+        this.salary = salary
+    }
+
+    getSalary(): number {
+        return this.salary * 2
+    }
+}
+
+class ContractEmployee extends Employee {
+
+    constructor(public salary: number){
+        super()
+        this.salary = salary
+    }
+
+    getSalary(): number {
+        return this.salary
+    }
+}
+
+const permanentEmployeeObj = new PermanentEmployee(30000)
+console.log(permanentEmployeeObj.getSalary()) // [LOG]: 60000 
+
+const contractEmployeeObj = new ContractEmployee(30000)
+console.log(contractEmployeeObj.getSalary()) // [LOG]: 30000 
+```
+
+
+42. Private Constructor & Singleton Pattern 
+```ts
+/**
+ * NOTE: Listen Again
+ * @see https://youtu.be/HiobGy14hJo?si=SfUDaYIQkYk2MTtO
+ */
+```
+
+
+43. What is an Interface 
+1. 
+```ts
+/**
+ * @see https://youtu.be/AXg8Af5nZCs?si=Po0DLOU6H7IPU3s9
+ */
+```
+2. 
+```ts
+/**
+ * 1. An interface property cannot have an initializer.
+ */
+interface User {
+    firstName: string = "Rohith" // An interface property cannot have an initializer.
+}
+```
+3. In TypeScript, interfaces are used to define the structure of an object, 
+but they cannot contain implementations of methods.
+```ts
+interface User {
+    greetUser():number { // ';' expected.
+        return 2
+    }
+}
+```
+
+
+44. Difference between `interface` and `type` keywords
+```ts
+interface User {
+    firstName: string;
+    lastName: string;
+
+    greetUser(): void;
+    greetFullName(): string;
+}
+
+class Admin implements User {
+    constructor(public firstName:string, public lastName:string) {}
+
+    greetUser(): void {
+        console.log(`Hi ${this.greetFullName()} you have Admin access`)
+    }
+
+    greetFullName(): string {
+        return `${this.firstName} ${this.lastName}`
+    }
+}
+
+class Public implements User {
+    constructor(public firstName:string, public lastName:string) {}
+
+    greetUser(): void {
+        console.log(`Hi ${this.greetFullName()} you have Public access`)
+    }
+
+    greetFullName(): string {
+        return `${this.firstName} ${this.lastName}`
+    }
+}
+
+function display(user: User) {
+    user.greetUser()
+}
+
+const adminObj: Admin = new Admin("Rohith", "Appala")
+const publicObj: Public = new Public("Ravinder", "Appala")
+
+display(adminObj) // [LOG]: "Hi Rohith Appala you have Admin access" 
+display(publicObj) // [LOG]: "Hi Ravinder Appala you have Public access"
 ```
