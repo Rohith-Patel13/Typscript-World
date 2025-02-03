@@ -685,4 +685,116 @@ adminObjTwo.company = "Wipro" // Errors in code:-  Cannot assign to 'company' be
 46. Optional Property in Interface 
 ```ts
 
+interface User {
+    readonly company: string;
+    location?: string // optional
+}
+
+class Admin implements User {
+    company: string = "Amazon"
+}
+
+const adminObjOne: Admin = new Admin()
+adminObjOne.company = "Google" // No errors
+```
+
+
+47. Extending Interface 
+```ts
+/**
+ * @see https://youtu.be/l7cx3AKrccI?si=ygLmiNvbJB3YcwtJ
+ */
+
+
+interface Roles {
+    admin?: string;
+}
+
+interface UserName {
+    employee: string;
+}
+
+interface User extends Roles,UserName {
+    company?: string;
+}
+
+/*
+Errors in code
+Property 'employee' is missing in type '{}' but required in type 'User'.
+*/
+const employeeName:User = {
+
+}
+```
+
+
+48. 1. A `class` implements multiple `interface`
+    2. A `class` can only extends a single class
+```ts
+/**
+ * @see https://youtu.be/l7cx3AKrccI?si=ygLmiNvbJB3YcwtJ
+ */
+interface User {
+    company: string;
+}
+
+interface Roles {
+    getRole(): string;
+}
+
+/*
+Errors in code:-
+
+Class 'Admin' incorrectly implements interface 'Roles'.
+  Property 'getRole' is missing in type 'Admin' but required in type 'Roles'.
+ */
+class Admin implements User,Roles {
+    company: string = "Amazon"
+}
+```
+```ts
+
+interface User {
+    company: string;
+}
+
+interface Roles {
+    getRole(): string;
+}
+
+class Admin implements User,Roles {
+    company: string = "Amazon"
+
+    getRole():string {
+        return "Admin"
+    }
+}
+```
+
+
+49. Using interface as Function Type 
+```ts
+/**
+ * @see https://youtu.be/43X6CpxQUro?si=h6DwL4e0OPE5RQum
+ */
+```
+
+
+50. Intersection Type in TypeScript 
+```ts
+/**
+ * @see https://youtu.be/ZVMAPLvfcDc?si=LMdB0z6nNMjkYTx5
+ * 
+ * When we use intersection with simple data types, then 
+ * in that case only common data types are considered
+ */
+
+```
+```ts
+/**
+ * @see https://youtu.be/ZVMAPLvfcDc?si=LMdB0z6nNMjkYTx5
+ * 
+ * When we use intersection with complex data types, then 
+ * in that case only all data types are considered
+ */
 ```
