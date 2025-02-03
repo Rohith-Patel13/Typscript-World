@@ -661,3 +661,28 @@ const publicObj: Public = new Public("Ravinder", "Appala")
 display(adminObj) // [LOG]: "Hi Rohith Appala you have Admin access" 
 display(publicObj) // [LOG]: "Hi Ravinder Appala you have Public access"
 ```
+
+
+45. Readonly Property in Interface 
+```ts
+interface User {
+    readonly company: string;
+}
+
+class Admin implements User {
+    company: string = "Amazon"
+}
+
+const adminObjOne: Admin = new Admin()
+adminObjOne.company = "Google" // No errors
+
+let adminObjTwo: User 
+adminObjTwo = new Admin()
+adminObjTwo.company = "Wipro" // Errors in code:-  Cannot assign to 'company' because it is a read-only property.
+```
+
+
+46. Optional Property in Interface 
+```ts
+
+```
