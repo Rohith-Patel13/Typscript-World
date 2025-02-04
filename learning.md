@@ -798,3 +798,64 @@ class Admin implements User,Roles {
  * in that case only all data types are considered
  */
 ```
+```ts
+
+interface User {
+    name: string, 
+    age: number
+}
+
+interface Admin {
+    role: string,
+    name: string
+}
+
+type AdminUserType = User & Admin
+
+/*
+Scenario One:- 
+
+Errors in code
+Type '{ name: string; }' is not assignable to type 'AdminUserType'.
+  Property 'age' is missing in type '{ name: string; }' but required in type 'User'.
+*/
+const adminUser: AdminUserType = {
+    name:"Rohith",  
+
+}
+```
+```ts
+
+interface User {
+    name: string, 
+    age: number
+}
+
+interface Admin {
+    role: string,
+    name: string
+}
+
+type AdminUserType = User & Admin
+
+
+/*
+Scenario Two:-
+
+Errors in code
+Type '{ name: string; role: string; }' is not assignable to type 'AdminUserType'.
+  Property 'age' is missing in type '{ name: string; role: string; }' but required in type 'User'.
+*/
+const adminUser: AdminUserType = {
+    name:"Rohith",  
+    role:"admin"
+}
+```
+
+
+51. Type Guards in TypeScript
+```ts
+/**
+ * @see https://youtu.be/QToF-_6vwKY?si=tFMquR-TTzRPXClr
+ */
+```
