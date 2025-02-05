@@ -853,9 +853,166 @@ const adminUser: AdminUserType = {
 ```
 
 
-51. Type Guards in TypeScript
+51. Type Guards with Class
 ```ts
 /**
  * @see https://youtu.be/QToF-_6vwKY?si=tFMquR-TTzRPXClr
+ */
+```
+```ts
+// Error scenario
+class Dog {
+    bark():string {
+        return "bow bow"
+    }
+}
+
+class Animal extends Dog {
+    breed():string {
+        return "breed"
+    }
+}
+
+function display(pet: Dog) {
+    return pet.breed() // Property 'breed' does not exist on type 'Dog'.
+}
+```
+```ts
+// Solution
+class Dog {
+    bark():string {
+        return "bow bow"
+    }
+}
+
+class Animal extends Dog {
+    breed():string {
+        return "breed"
+    }
+}
+
+function display(pet: Dog) {
+    if(pet instanceof Animal){
+        return pet.breed()
+    } 
+    return pet.bark()
+}
+
+const dogObj: Dog = new Dog();
+const animalObj: Animal = new Animal();
+
+console.log(display(animalObj)) // [LOG]: "breed" 
+console.log(display(dogObj)) // [LOG]: "bow bow" 
+```
+
+
+52. Type Guards with interface
+```ts
+// Improper scenario
+interface User {
+    name: string;
+    email?: string
+}
+
+const userDetails: User = {
+    name:"Rohith"
+}
+
+function display(userDetails: User) {
+    return `Email of ${userDetails.name} is ${userDetails.email}`
+}
+
+console.log(display(userDetails)) // [LOG]: "Email of Rohith is undefined" 
+```
+```ts
+// Solution
+interface User {
+    name: string;
+    email?: string
+}
+
+const userDetailsWithoutEmail: User = {
+    name:"Rohith"
+}
+
+const userDetailsWithEmail: User = {
+    name:"Appala",
+    email:"appala@gmail.com"
+}
+
+function display(userDetails: User): string {
+    if("email" in userDetails) return `Email of ${userDetails.name} is ${userDetails.email}`
+
+    return `Email of ${userDetails.name} is empty.`
+}
+
+console.log(display(userDetailsWithoutEmail)) // [LOG]: "Email of Rohith is empty."
+console.log(display(userDetailsWithEmail)) // [LOG]: "Email of Appala is appala@gmail.com" 
+```
+
+
+53. Discriminated Union 
+```ts
+/**
+ * Discriminated Union is one way of implementing type gaurd in typescript
+ * 
+ * @see https://youtu.be/sG5C29-YoGM?si=Npy-H8NjUPAyCVAD
+ */
+
+// Error scenario
+interface Circle {
+    radius: number;
+}
+
+interface Square {
+    length: number;
+}
+
+type Shape = Circle | Square;
+
+function calculate(shape: Shape){
+    /*
+    Errors in code
+        Property 'radius' does not exist on type 'Shape'.
+        Property 'radius' does not exist on type 'Square'.
+    */
+    return shape.radius
+}
+```
+```ts
+interface Circle {
+    radius: number;
+    kind: "Circle"
+}
+
+interface Square {
+    length: number;
+    kind: "Square"
+}
+
+type Shape = Circle | Square;
+
+function calculate(shape: Shape){
+    switch (shape.kind) {
+        case "Circle": {
+            return shape.radius
+        }
+
+        default: {
+            return shape.length
+        }
+    }
+}
+
+console.log(calculate({radius:10,kind:"Circle"})) // [LOG]: 10 
+console.log(calculate({length:20,kind:"Square"})) // [LOG]: 20 
+```
+
+
+
+54. Type Casting
+```ts
+/**
+ * @see https://youtu.be/KTTTe58d6wY?si=MmisFapwmwLU0ynT
  */
 ```
